@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartIntern - Find Your Perfect Internship</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .logo span {
+            color: #111827;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #4f46e5;
+        }
+
+        .login-btn {
+            background: #4f46e5;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 90px 7%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #facc15;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            background: white;
+            max-width: 850px;
+            margin: 35px auto 0;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .search-btn {
+            border: none;
+            background: #111827;
+            color: white;
+            padding: 0 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* STATS */
+
+        .stats {
+            background: white;
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h2 {
+            color: #4f46e5;
+            font-size: 28px;
+        }
+
+        .stat p {
+            color: #6b7280;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .filter {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .filter.active,
+        .filter:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        /* INTERNSHIP CARDS */
+
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .company {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            background: #eef2ff;
+            color: #4f46e5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .company h3 {
+            font-size: 18px;
+        }
+
+        .company p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .card h2 {
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            color: #6b7280;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 20px;
+        }
+
+        .skill {
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .match {
+            color: #16a34a;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .apply-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .apply-btn:hover {
+            background: #3730a3;
+        }
+
+        .save-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* PROFILE */
+
+        .profile {
+            background: linear-gradient(135deg, #111827, #1e293b);
+            color: white;
+            border-radius: 18px;
+            padding: 35px;
+            margin-top: 60px;
+        }
+
+        .profile h2 {
+            margin-bottom: 10px;
+        }
+
+        .profile p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .profile-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .profile-skills span {
+            background: #334155;
+            padding: 9px 14px;
+            border-radius: 20px;
+        }
+
+        .match-btn {
+            margin-top: 25px;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #facc15;
+            color: #111827;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 40px 7%;
+            margin-top: 70px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #9ca3af;
+            margin-top: 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+            .internship-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-btn {
+                padding: 14px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .internship-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 92%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="logo">
+        Smart<span>Intern</span>
+    </div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#internships">Internships</a></li>
+        <li><a href="#profile">My Profile</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+
+    <a href="#profile" class="login-btn">Student Login</a>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <h1>Find Your <span>Perfect Internship</span></h1>
+
+    <p>
+        SmartIntern helps students discover internships that match
+        their skills, interests and career goals.
+    </p>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search internships, skills or companies..."
+        >
+
+        <button class="search-btn" onclick="searchInternships()">
+            Search
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat">
+        <h2>10,000+</h2>
+        <p>Internships</p>
+    </div>
+
+    <div class="stat">
+        <h2>2,500+</h2>
+        <p>Companies</p>
+    </div>
+
+    <div class="stat">
+        <h2>25,000+</h2>
+        <p>Students</p>
+    </div>
+
+    <div class="stat">
+        <h2>92%</h2>
+        <p>Match Accuracy</p>
+    </div>
+
+</section>
+
+
+<!-- INTERNSHIPS -->
+
+<main class="container" id="internships">
+
+    <div class="section-title">
+        <h2>Recommended Internships</h2>
+    </div>
+
+    <div class="filters">
+
+        <button class="filter active" onclick="filterJobs('all', this)">
+            All
+        </button>
+
+        <button class="filter" onclick="filterJobs('technology', this)">
+            Technology
+        </button>
+
+        <button class="filter" onclick="filterJobs('marketing', this)">
+            Marketing
+        </button>
+
+        <button class="filter" onclick="filterJobs('design', this)">
+            Design
+        </button>
+
+        <button class="filter" onclick="filterJobs('finance', this)">
+            Finance
+        </button>
+
+    </div>
+
+
+    <div class="internship-grid" id="internshipGrid">
+
+
+        <!-- CARD 1 -->
+
+        <div class="card" data-category="technology">
+
+            <div class="company">
+
+                <div class="company-logo">
+                    G
+                </div>
+
+                <div>
+                    <h3>Google</h3>
+                    <p>Bangalore, India</p>
+                </div>
+
+            </div>
+
+            <h2>Software Development Intern</h2>
+
+            <div class="details">
+                💰 ₹35,000/month<br>
+                🕒 6 Months<br>
+                🏢 Hybrid
+            </div>
+
+            <div class="skills">
+                <span class="skill">Python</span>
+                <span class="skill">Java</span>
+                <span class="skill">Git</span>
+            </div>
+
+            <div class="match">
+                ⭐ 95% Skill Match
+            </div>
+
+            <div class="card-bottom">
+
+                <button class="apply-btn"
+                    onclick="apply('Software Development Intern')">
+                    Apply Now
+                </button>
+
+                <button class="save-btn"
+                    onclick="saveJob(this)">
+                    ♡
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="card" data-category="technology">
+
+            <div class="company">
+
+                <div class="company-logo">
+                    M
+                </div>
+
+                <div>
+                    <h3>Microsoft</h3>
+                    <p>Hyderabad, India</p>
+                </div>
+
+            </div>
+
+            <h2>AI / Machine Learning Intern</h2>
+
+            <div class="details">
+                💰 ₹40,000/month<br>
+                🕒 6 Months<br>
+                🏢 Remote
+            </div>
+
+            <div class="skills">
+                <span class="skill">Python</span>
+                <span class="skill">AI</span>
+                <span class="skill">Machine Learning</span>
+            </div>
+
+            <div class="match">
+                ⭐ 91% Skill Match
+            </div>
+
+            <div class="card-bottom">
+
+                <button class="apply-btn"
+                    onclick="apply('AI / Machine Learning Intern')">
+                    Apply Now
+                </button>
+
+                <button class="save-btn"
+                    onclick="saveJob(this)">
+                    ♡
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+
+        <div class="card" data-category="design">
+
+            <div class="company">
+
+                <div class="company-logo">
+                    A
+                </div>
+
+                <div>
+                    <h3>Adobe</h3>
+                    <p>Noida, India</p>
+                </div>
+
+            </div>
+
+            <h2>UI/UX Design Intern</h2>
+
+            <div class="details">
+                💰 ₹25,000/month<br>
+                🕒 4 Months<br>
+                🏢 Hybrid
+            </div>
+
+            <div class="skills">
+                <span class="skill">Figma</span>
+                <span class="skill">UI/UX</span>
+                <span class="skill">Design</span>
+            </div>
+
+            <div class="match">
+                ⭐ 88% Skill Match
+            </div>
+
+            <div class="card-bottom">
+
+                <button class="apply-btn"
+                    onclick="apply('UI/UX Design Intern')">
+                    Apply Now
+                </button>
+
+                <button class="save-btn"
+                    onclick="saveJob(this)">
+                    ♡
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+
+        <div class="card" data-category="marketing">
+
+            <div class="company">
+
+                <div class="company-logo">
+                    S
+                </div>
+
+                <div>
+                    <h3>Swiggy</h3>
+                    <p>Mumbai, India</p>
+                </div>
+
+            </div>
+
+            <h2>Digital Marketing Intern</h2>
+
+            <div class="details">
+                💰 ₹20,000/month<br>
+                🕒 3 Months<br>
+                🏢 On-site
+            </div>
+
+            <div class="skills">
+                <span class="skill">Marketing</span>
+                <span class="skill">SEO</span>
+                <span class="skill">Analytics</span>
+            </div>
+
+            <div class="match">
+                ⭐ 84% Skill Match
+            </div>
+
+            <div class="card-bottom">
+
+                <button class="apply-btn"
+                    onclick="apply('Digital Marketing Intern')">
+                    Apply Now
+                </button>
+
+                <button class="save-btn"
+                    onclick="saveJob(this)">
+                    ♡
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 5 -->
+
+        <div class="card" data-category="finance">
+
+            <div class="company">
+
+                <div class="company-logo">
+                    P
+                </div>
+
+                <div>
+                    <h3>Paytm</h3>
+                    <p>Noida, India</p>
+                </div>
+
+            </div>
+
+            <h2>Finance Analyst Intern</h2>
+
+            <div class="details">
+                💰 ₹22,000/month<br>
+                🕒 4 Months<br>
+                🏢 Hybrid
+            </div>
+
+            <div class="skills">
+                <span class="skill">Excel</span>
+                <span class="skill">Finance</span>
+                <span class="skill">Analytics</span>
+            </div>
+
+            <div class="match">
+                ⭐ 82% Skill Match
+            </div>
+
+            <div class="card-bottom">
+
+                <button class="apply-btn"
+                    onclick="apply('Finance Analyst Intern')">
+                    Apply Now
+                </button>
+
+                <button class="save-btn"
+                    onclick="saveJob(this)">
+                    ♡
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 6 -->
+
+        <div class="card" data-category="technology">
+
+            <div class="company">
+
+                <div class="company-logo">
+                    A
+                </div>
+
+                <div>
+                    <h3>Amazon</h3>
+                    <p>Bangalore, India</p>
+                </div>
+
+            </div>
+
+            <h2>Web Developer Intern</h2>
+
+            <div class="details">
+                💰 ₹30,000/month<br>
+                🕒 6 Months<br>
+                🏢 Hybrid
+            </div>
+
+            <div class="skills">
+                <span class="skill">HTML</span>
+                <span class="skill">CSS</span>
+                <span class="skill">JavaScript</span>
+            </div>
+
+            <div class="match">
+                ⭐ 94% Skill Match
+            </div>
+
+            <div class="card-bottom">
+
+                <button class="apply-btn"
+                    onclick="apply('Web Developer Intern')">
+                    Apply Now
+                </button>
+
+                <button class="save-btn"
+                    onclick="saveJob(this)">
+                    ♡
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <section class="profile" id="profile">
+
+        <h2>🎓 Your Smart Profile</h2>
+
+        <p>
+            Add your skills to receive personalized internship recommendations.
+        </p>
+
+        <div class="profile-skills">
+
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Java</span>
+            <span>SQL</span>
+
+        </div>
+
+        <button class="match-btn" onclick="findMatches()">
+            ✨ Find My Best Matches
+        </button>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer id="about">
+
+    <h2>SmartIntern</h2>
+
+    <p>
+        Connecting students with opportunities that match their skills.
+    </p>
+
+    <p>
+        © 2026 SmartIntern. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+    // SEARCH
+
+    function searchInternships() {
+
+        const search =
+            document.getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+        const cards =
+            document.querySelectorAll(".card");
+
+        cards.forEach(card => {
+
+            const text =
+                card.innerText.toLowerCase();
+
+            if (text.includes(search)) {
+
+                card.style.display = "block";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    // FILTER
+
+    function filterJobs(category, button) {
+
+        const cards =
+            document.querySelectorAll(".card");
+
+        const filters =
+            document.querySelectorAll(".filter");
+
+        filters.forEach(f =>
+            f.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        cards.forEach(card => {
+
+            if (
+                category === "all" ||
+                card.dataset.category === category
+            ) {
+
+                card.style.display = "block";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    // APPLY
+
+    function apply(job) {
+
+        alert(
+            "Application started for:\n\n" +
+            job +
+            "\n\nYou can connect this button to a real application form later."
+        );
+
+    }
+
+
+    // SAVE
+
+    function saveJob(button) {
+
+        if (button.innerHTML === "♡") {
+
+            button.innerHTML = "♥";
+            button.style.color = "#ef4444";
+
+            alert("Internship saved!");
+
+        } else {
+
+            button.innerHTML = "♡";
+            button.style.color = "#111827";
+
+        }
+
+    }
+
+
+    // SMART MATCH
+
+    function findMatches() {
+
+        alert(
+            "✨ Smart Matching\n\n" +
+            "Based on your skills, we found internships with strong matches!\n\n" +
+            "JavaScript → Web Developer\n" +
+            "Python → AI / ML\n" +
+            "HTML + CSS → Web Development"
+        );
+
+        document
+            .getElementById("internships")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+</script>
+
+</body>
+</html>

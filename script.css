@@ -1,0 +1,103 @@
+// SEARCH INTERNSHIPS
+
+function searchInternships() {
+
+    const search = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+}
+
+
+// FILTER INTERNSHIPS
+
+function filterJobs(category, button) {
+
+    const cards = document.querySelectorAll(".card");
+    const filters = document.querySelectorAll(".filter");
+
+    filters.forEach(filter => {
+        filter.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    cards.forEach(card => {
+
+        if (
+            category === "all" ||
+            card.dataset.category === category
+        ) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+}
+
+
+// APPLY BUTTON
+
+function apply(job) {
+
+    alert(
+        "Application started for:\n\n" +
+        job +
+        "\n\nYou can add a real application form later."
+    );
+
+}
+
+
+// SAVE INTERNSHIP
+
+function saveJob(button) {
+
+    if (button.innerHTML === "♡") {
+
+        button.innerHTML = "♥";
+        button.style.color = "#ef4444";
+
+    } else {
+
+        button.innerHTML = "♡";
+        button.style.color = "#111827";
+
+    }
+
+}
+
+
+// SMART MATCHING
+
+function findMatches() {
+
+    alert(
+        "Smart Matching Results\n\n" +
+        "JavaScript → Web Developer\n" +
+        "Python → AI / ML\n" +
+        "HTML + CSS → Web Development"
+    );
+
+    document
+        .getElementById("internships")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
